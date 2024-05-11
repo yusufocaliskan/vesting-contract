@@ -2,6 +2,39 @@
 
 This is an upgradable staking contract developed in Solidity. To deploy the staking contract on the Sepolia network, execute the following command:
 
+## Upgradable Stake Contract
+
+Deploy: Stake Contract
+
+```shell
+npx hardhat run scripts/deployUpgradeableStakeContract.js  --network bscMainnet
+```
+
+Upgrade: The upgradable Stake Contrat
+
+```shell
+npx hardhat run scripts/upgradeStakeContract.js --network bscTestnet
+```
+
+Testing comman
+
+```shell
+npx hardhat test test/StakeContract.js
+```
+
+Start the hardhat node on local (if you wish)
+
+```shell
+npx hardhat node
+```
+
+Others
+
+```shell
+npx hardhat help
+REPORT_GAS=true npx hardhat test
+```
+
 # Usage
 
 Create a new Stake Pool
@@ -64,37 +97,4 @@ await updateTimestampAsDays(365);
       'test1', //pool id
       '1', //stake id
     );
-```
-
-## Upgradable Stake Contract
-
-Deploy: Stake Contract
-
-```shell
-npx hardhat run scripts/deployUpgradeableStakeContract.js  --network bscMainnet
-```
-
-Upgrade: The upgradable Stake Contrat
-
-```shell
-npx hardhat run scripts/upgradeStakeContract.js --network bscTestnet
-```
-
-Testing comman
-
-```shell
-npx hardhat test test/StakeContract.js
-```
-
-Start the hardhat node on local (if you wish)
-
-```shell
-npx hardhat node
-```
-
-Others
-
-```shell
-npx hardhat help
-REPORT_GAS=true npx hardhat test
 ```
