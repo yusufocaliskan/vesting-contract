@@ -37,64 +37,54 @@ REPORT_GAS=true npx hardhat test
 
 # Usage
 
-Create a new Stake Pool
+Create a new Event
 
 ```shell
-await stakeContract.createStakePool(
-      'test1', //id
-      'Test Stake Pool', //name
-      1715242924, //start
-      1746778924, //end
-      5000, //apy 50%
-      parseUnits('1', 18), //min
-      parseUnits('1000000', 18), //max
+await vestingContract.createNewEvent(
+      'Test Event', //name
+      'event1', //id
+      50, //the percentage of the allocated resource that would be giving to the user in tge
+      6000, //vesting
+      30, //cliff
+      '0x0', //privateAccount
     );
 ```
 
-Stake token to the pool by giving a stake pool Id
+You can also create a private event for your customer.
 
 ```shell
-    await stakeContract.stakeToken(
-      user1.address, //user
-      parseUnits('1', 18), //amount
-      'test1', //pool id
+await vestingContract.createNewEvent(
+      'Test Event', //name
+      'event1', //id
+      50, //the percentage of the allocated resource that would be giving to the user in tge
+      6000, //vesting
+      30, //cliff
+      '0x0', //privateAccount
     );
 ```
 
-Additional stake can be added to the same pool
+Allocate resource for user by giving her/his wallet address
 
 ```shell
-    await stakeContract.stakeToken(
-      user1.address, //user
-      parseUnits('2', 18), //amount
-      'test1', //pool id
-    );
-
-await stakeContract.stakeToken(
-      user1.address, //user
-      parseUnits('3', 18), //amount
-      'test1', //pool id
+const resp = await vestingContract.addPrivateVestingSchedule(
+      user1.address, //id
+      parseEther('1'),
+      'event1',
+      0, //leave it a 0, the event vesting time will be used.
+      0, //leave it a 0, the event cliff time will be used.
     );
 ```
 
-Total Claim: Claim the rewards in the pool by giving the pool id:
-
-```shell await updateTimestampAsDays(365);
-
-    const tx = await stakeContract.claimReward4Total(
-      user1.address, //user
-      'test1', //pool id
-    );
-```
-
-Claming for each stake : Claim the rewards in the pool by giving the pool id:
+1. Users can access their allocated resources after the scheduled start time. The claimableAmount will be recalculated every second during the vesting period.
+2. Users can only claim resources up to the percentage specified at the Token Generation Event (TGE) once the event has commenced.
+3. Users will not be able to claim any tokens until the cliff period has elapsed.
+4. After the cliff period, the claimableAmount will begin to increase until it reaches the total allocated amount.
 
 ```shell
-await updateTimestampAsDays(365);
-
-    const tx = await stakeContract.claimReward4Each(
-      user1.address, //user
-      'test1', //pool id
-      '1', //stake id
+    const resp = await vestingContract.claim(
+      'event1',
+      user1.address, //id
     );
 ```
+
+check the test file for more functions.
