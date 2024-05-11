@@ -1,25 +1,19 @@
 # Hardhat Project
 
-This is an upgradable staking contract developed in Solidity. To deploy the staking contract on the Sepolia network, execute the following command:
+Welcome to our token distribution guide! Here’s how it works: After our Token Generation Event (TGE) kicks off, you can start claiming tokens based on a carefully designed schedule. Initially, your claimable tokens increase second by second once the event starts. However, you'll need to wait out the cliff period before making any claims. After this, the amount you can claim grows steadily until you've accessed your full allocation. It’s a smooth and transparent way to manage your tokens!
 
-## Upgradable Stake Contract
+## Upgradable Vesting Contract
 
-Deploy: Stake Contract
-
-```shell
-npx hardhat run scripts/deployUpgradeableStakeContract.js  --network bscMainnet
-```
-
-Upgrade: The upgradable Stake Contrat
+Deploy: Vesting Contract
 
 ```shell
-npx hardhat run scripts/upgradeStakeContract.js --network bscTestnet
+npx hardhat run scripts/deployVestingContract.js  --network bscMainnet
 ```
 
 Testing comman
 
 ```shell
-npx hardhat test test/StakeContract.js
+npx hardhat test test/VestingTest.js
 ```
 
 Start the hardhat node on local (if you wish)
